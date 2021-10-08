@@ -1,0 +1,14 @@
+FrmMain类：主界面类，其中的方法AutostartListening是进行监听的
+			方法ClientConnected是对客户端进行连接的方法
+AutostartListening：通过调用StartConnectionListener进行监听。
+
+StartConnectionListener：主要使用ListenServer.Listen(Settings.ListenPort, Settings.IPv6Support, Settings.UseUPnP);
+			开通监听端口，其余部分为异常检测与处理部分。
+
+Listen：其中开启选项UPnP选项时使用CreatePortMapAsync函数开通我们UPnp机器上的端口用于监听。
+
+	其中当我们的机器支持Ipv6时我们在打开IPv6选项时，通过Socket函数实例化新的IPv6 socket实例，再通过bind函数讲新的socket实例与端口绑定实现监听。
+
+	其余正常情况通过Listen函数打开端口直接开始监听，再Listen的最后通过AcceptClient函数对传入的连接进行身份验证。
+
+ClientConnected：
